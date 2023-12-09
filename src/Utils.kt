@@ -3,6 +3,8 @@ import java.security.MessageDigest
 import kotlin.io.path.Path
 import kotlin.io.path.readLines
 import kotlin.io.path.readText
+import kotlin.math.max
+import kotlin.math.min
 
 /**
  * Reads lines from the given input txt file.
@@ -25,3 +27,21 @@ fun String.md5() = BigInteger(1, MessageDigest.getInstance("MD5").digest(toByteA
  * The cleaner shorthand for printing output.
  */
 fun Any?.println() = println(this)
+
+operator fun LongRange.plus(offset: Long): LongRange {
+    return (first + offset)..(last + offset)
+}
+
+fun LongRange.overlaps(other: LongRange): Boolean = (other.first in first..last || other.last in first..last)
+fun LongRange.contains(other: LongRange): Boolean = other.first >= start && other.last <= last
+
+fun LongRange.cut(window: LongRange): List<LongRange> {
+    val intersectionLower = max(window.first, first)
+    val intersectionUpper = min(window.last, last)
+    return if (overlaps(window)) {
+        listOf(first..<intersectionLower, intersectionLower..intersectionUpper, (intersectionUpper + 1)..last)
+            .filter { it.first <= it.last }
+    } else {
+        listOf(this)
+    }
+}
