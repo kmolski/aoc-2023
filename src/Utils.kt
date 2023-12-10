@@ -28,12 +28,10 @@ fun String.md5() = BigInteger(1, MessageDigest.getInstance("MD5").digest(toByteA
  */
 fun Any?.println() = println(this)
 
-operator fun LongRange.plus(offset: Long): LongRange {
-    return (first + offset)..(last + offset)
-}
+operator fun LongRange.plus(offset: Long): LongRange = (first + offset)..(last + offset)
+operator fun LongRange.contains(other: LongRange): Boolean = other.first >= start && other.last <= last
 
 fun LongRange.overlaps(other: LongRange): Boolean = (other.first in first..last || other.last in first..last)
-fun LongRange.contains(other: LongRange): Boolean = other.first >= start && other.last <= last
 
 fun LongRange.cut(window: LongRange): List<LongRange> {
     val intersectionLower = max(window.first, first)
