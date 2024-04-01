@@ -3,6 +3,7 @@ import java.security.MessageDigest
 import kotlin.io.path.Path
 import kotlin.io.path.readLines
 import kotlin.io.path.readText
+import kotlin.math.absoluteValue
 import kotlin.math.max
 import kotlin.math.min
 
@@ -42,4 +43,21 @@ fun LongRange.cut(window: LongRange): List<LongRange> {
     } else {
         listOf(this)
     }
+}
+
+fun <T> Sequence<T>.repeat() = sequence { while (true) yieldAll(this@repeat) }
+
+fun Long.gcd(that: Long): Long {
+    var a = this
+    var b = that
+    while (b != 0L) {
+        val temp = b
+        b = a % b
+        a = temp
+    }
+    return a
+}
+
+fun Long.lcm(that: Long): Long {
+    return (this * that).absoluteValue / this.gcd(that)
 }
