@@ -9,6 +9,7 @@ My Advent of Code 2023 solutions in [Kotlin][kotlin], based on the [AoC Kotlin T
 - [Day 6: Wait For It](./src/Day06.kt)
 - [Day 7: Camel Cards](./src/Day07.kt)
 - [Day 8: Haunted Wasteland](./src/Day08.kt)
+- [Day 9: Mirage Maintenance](./src/Day09.kt)
 
 [kotlin]: https://kotlinlang.org
 [template]: https://github.com/kotlin-hands-on/advent-of-code-kotlin-template
